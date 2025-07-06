@@ -469,3 +469,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 }); 
 
+//Cadastro
+document.getElementById('open-register-btn').addEventListener('click', () => {
+    loginModal.style.display = 'none';
+    registerModal.style.display = 'flex';
+});
+

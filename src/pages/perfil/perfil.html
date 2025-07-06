@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Conta - Happiness Entregas</title>
+    <script src="../../../global_script.js" defer></script>
+    <link rel="stylesheet" href="../../../global.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-section {
+            border-top: 2px solid #ccc;
+            margin-top: 30px;
+            padding-top: 20px;
+        }
+        .order {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="account-container">
+        <h2 id="welcome">Minha Conta</h2>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+        <button class="back-btn" onclick="goBack()">Voltar</button>
+
+        <div class="orders" id="orders"></div>
+
+        <!-- Área exclusiva para Admin -->
+        <div class="admin-section" id="adminSection" style="display:none;">
+            <h3>Área Administrativa</h3>
+            <p>Total de Pedidos Feitos: <span id="totalOrders"></span></p>
+            <div id="allOrders"></div>
+        </div>
+    </div>
+
+    <script>
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) {
+            alert("Você precisa estar logado!");
+            window.location.href = "../../../index.html";
+        } else {
+            document.getElementById('welcome').textContent = `Bem-vindo, ${currentUser.name}`;
+            loadUserOrders();
+            if (currentUser.email === "admin@happiness.com") {
+                showAdminSection();
+            }
+        }
+
+        function logout() {
+            if (confirm("Deseja realmente sair da conta?")) {
+                localStorage.removeItem('currentUser');
+                alert("Logout realizado com sucesso!");
+                window.location.href = "../../../index.html";
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function loadUserOrders() {
+            const ordersHistory = JSON.parse(localStorage.getItem('ordersHistory')) || [];
+            const userOrders = ordersHistory.filter(order => order.user.email === currentUser.email);
+
+            const ordersDiv = document.getElementById('orders');
+
+            // Se for admin, não mostrar "Você ainda não fez nenhum pedido"
+            if (currentUser.email === "admin@happiness.com") {
+                ordersDiv.innerHTML = "<p>ADM:</p>";
+                return; // Ignora o restante da função
+            }
+
+            if (userOrders.length === 0) {
+                ordersDiv.innerHTML = "<p>Você ainda não fez nenhum pedido.</p>";
+            } else {
+                userOrders.forEach(order => {
+                    const orderDiv = document.createElement('div');
+                    orderDiv.className = 'order';
+                    orderDiv.innerHTML = `
+                        <h4>Pedido #${order.id}</h4>
+                        <p><strong>Data:</strong> ${order.date}</p>
+                        <p><strong>Total:</strong> R$ ${order.total.toFixed(2)}</p>
+                        <p><strong>Itens:</strong></p>
+                        <ul>
+                            ${order.items.map(item => `<li>${item.quantity}x ${item.name} (R$ ${item.price.toFixed(2)})</li>`).join('')}
+                        </ul>
+                    `;
+                    ordersDiv.appendChild(orderDiv);
+                });
+            }
+        }
+
+
+        function showAdminSection() {
+            const ordersHistory = JSON.parse(localStorage.getItem('ordersHistory')) || [];
+            const adminSection = document.getElementById('adminSection');
+            const totalOrders = document.getElementById('totalOrders');
+            const allOrdersDiv = document.getElementById('allOrders');
+
+            adminSection.style.display = 'block';
+            totalOrders.textContent = ordersHistory.length;
+
+            if (ordersHistory.length === 0) {
+                allOrdersDiv.innerHTML = "<p>Nenhum pedido foi registrado ainda.</p>";
+            } else {
+                ordersHistory.forEach(order => {
+                    const orderDiv = document.createElement('div');
+                    orderDiv.className = 'order';
+                    orderDiv.innerHTML = `
+                        <h4>Pedido #${order.id}</h4>
+                        <p><strong>Cliente:</strong> ${order.user.name} (${order.user.email}) ${order.user.address}</p>
+                        <p><strong>Data:</strong> ${order.date}</p>
+                        <p><strong>Total:</strong> R$ ${order.total.toFixed(2)}</p>
+                        <p><strong>Itens:</strong></p>
+                        <ul>
+                            ${order.items.map(item => `<li>${item.quantity}x ${item.name} (R$ ${item.price.toFixed(2)})</li>`).join('')}
+                        </ul>
+                    `;
+                    allOrdersDiv.appendChild(orderDiv);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

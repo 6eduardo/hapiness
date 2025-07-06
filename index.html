@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Happines Entregas, site de encomendas e entregas online">
+    <meta name="author" content="Eduardo Belchior">
+    <title> Happiness Entregas </title>
+
+    <link rel="stylesheet" href="global.css">
+    <!-- Importar o CSS da biblioteca AOS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- Importar o JavaScript da biblioteca AOS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!-- Importar o global script -->
+    <script src="./global_script.js" defer></script>
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header_container">
+            <nav>
+                <div class="logo">
+                   <figure>
+                        <img src="./src/assets/images/logo.jpg" alt="logo">
+                   </figure>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" id="home-link">Início</a></li>
+                    <li><a href="#" id="partners-link">Lojas Parceiras</a></li>
+                    <li><a href="#" id="login-link">Login</a></li>
+                    <li><a href="#" id="register-link">Cadastre-se</a></li>
+                    <li><a href="/src/pages/perfil/perfil.html" id="account-link" style="display: none;">Conta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main>
+
+            <section class="hero">
+                <div class="hero_container">
+                    <h1>Peça dos melhores estabelecimentos da cidade</h1>
+                    <p>Com <strong>Happiness Entregas</strong>, você pode solicitar itens diretamente de lojas e restaurantes parceiros. Nossos agentes vão ao local, realizam a compra e entregam tudo no conforto da sua casa.</p>
+                    <a href="#" class="btn" id="order-now-btn">Peça Agora</a>
+                </div>
+            </section>
+        
+            <!-- Lojas Parceiras -->
+            <section class="partners" id="partners-section">
+                <div class="container">
+                    <h2 class="section-title" data-aos="fade-up"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out">Nossos Parceiros</h2>
+                    <div class="partner-grid" id="partner-grid" data-aos="slide-right"
+                    data-aos-duration="1000">
+                        <!-- Parceiros serão carregados via JavaScript -->
+                    </div>
+                </div>
+            </section>
+        
+            <!-- Modal de Login -->
+            <div class="modal" id="login-modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Login</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Senha</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        
+            <!-- Modal de Cadastro -->
+            <div class="modal" id="register-modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Cadastre-se</h2>
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-name">Nome Completo</label>
+                            <input type="text" id="register-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Senha</label>
+                            <input type="password" id="register-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-phone">Telefone</label>
+                            <input type="tel" id="register-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-address">Endereço (opcional)</label>
+                            <input type="text" id="register-address">
+                        </div>
+                        <button type="submit" class="btn">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+        
+            <!-- Modal da Loja -->
+            <div class="modal" id="store-modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2 id="store-modal-title">Loja</h2>
+                    <div class="products-grid" id="products-grid">
+                        <!-- Os Produtos serão carregados via JavaScript com requisições feitas ao backend -->
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Modal do Carrinho -->
+            <div class="modal" id="cart-modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Seu Pedido</h2>
+                    <div class="cart-items" id="cart-items">
+                        <!-- Os Itens do carrinho serão carregados via JavaScript com requisições feitas ao backend -->
+                    </div>
+                    <div class="cart-total" id="cart-total">
+                        Total: 0.00 kz
+                    </div>
+                    <button class="btn" id="confirm-order-btn" style="margin-top: 20px;">Confirmar Pedido</button>
+                </div>
+            </div>
+        
+            <!-- Modal de Confirmação -->
+            <div class="modal" id="confirmation-modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2 id="confirmation-title">Pedido Confirmado!</h2>
+                    <p id="confirmation-message">Seu pedido foi recebido e está sendo processado. Aguarde a entrega no conforto da sua casa.</p>
+                </div>
+            </div>
+            
+    </main>
+    <!-- Hero Section -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Happiness Entregas. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

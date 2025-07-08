@@ -241,7 +241,7 @@ function openStore(storeId) {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         productCard.innerHTML = `
-            <img src="src/assets/images/alimentos/${product.img}" alt="${product.name}" class="product-image" />
+            <img src="/hapiness/src/assets/images/alimentos/${product.img}" alt="${product.name}" class="product-image" />
             <h4>${product.name}</h4>
             <p>${product.description}</p>
             <div class="product-price">R$ ${product.price.toFixed(2)}</div>

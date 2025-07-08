@@ -157,11 +157,20 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 Happiness Entregas. Todos os direitos reservados.</p>
+            <button id="logoutBtn" class="logout-button" style="display: none;">Terminar Sessão</button>
         </div>
     </footer>
 
     <script>
         AOS.init();
+        
+        // Função de logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            // Limpa o usuário atual (exemplo usando localStorage)
+            localStorage.removeItem("currentUser");  // ou o nome da chave que tu usa
+            alert("Sessão terminada com sucesso!");
+            location.reload();  // Atualiza a página
+        });
     </script>
 </body>
 </html>

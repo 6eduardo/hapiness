@@ -244,7 +244,7 @@ function openStore(storeId) {
             <img src="/hapiness/src/assets/images/alimentos/${product.img}" alt="${product.name}" class="product-image" />
             <h4>${product.name}</h4>
             <p>${product.description}</p>
-            <div class="product-price">R$ ${product.price.toFixed(2)}</div>
+            <div class="product-price">KZS ${product.price.toFixed(2)}</div>
             <button class="add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}">Adicionar ao Carrinho</button>
         `;
         productsGrid.appendChild(productCard);
